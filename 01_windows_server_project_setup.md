@@ -125,10 +125,15 @@ You will see three new active services
 <img width="1527" height="746" alt="image" src="https://github.com/user-attachments/assets/50229aea-54bb-414d-926c-e00acc9c4ed5" />
 
 
-
-
 ## Step 5:  Set Server's DNS
 After the promotion of the domain controller you will navigate back to Ipv4 settings and change the DNS to the IP address of the server. This will allow your domain controller to function with DNS
+
+After the reset you will see the server set to 127.0.0.1.  We need to change it to the IP address of the server:
+<img width="373" height="116" alt="image" src="https://github.com/user-attachments/assets/3a6cd43f-8e08-48e6-8a44-a04f9a5ac08b" />
+
+
+<img width="379" height="200" alt="image" src="https://github.com/user-attachments/assets/f215400e-f5af-4e90-9d68-7360c4bf7aec" />
+
 
 
 <!------------------------------------Install DHCP Role------------------------------------------------------>

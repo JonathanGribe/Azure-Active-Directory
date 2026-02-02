@@ -137,7 +137,7 @@ After the reset you will see the server set to 127.0.0.1.  We need to change it 
 
 
 <!------------------------------------Install DHCP Role------------------------------------------------------>
-#Section 3: Install DHCP Role
+# Section 3: Install DHCP Role
 
 
 <!---------------------------------------CLIENT SETUP------------------------------------------------------------------>

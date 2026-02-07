@@ -138,7 +138,85 @@ After the reset you will see the server set to 127.0.0.1.  We need to change it 
 
 <!------------------------------------Install DHCP Role------------------------------------------------------>
 # Section 3: Install DHCP Role
+# Install the DHCP Server role on Windows Server 2025
 
+This walkthrough describes how to install the Dynamic Host Configuration Protocol (DHCP) Server role on Windows Server 2025. The DHCP Server role enables your server to automatically assign IP addresses and network configuration settings to client devices on your network.
+
+## Prerequisites
+
+Before you begin, verify that:
+
+- You have administrative credentials for the server.
+- The server has a static IP address configured.
+- You have network connectivity.
+
+## Install the DHCP Server role
+
+1. Open Server Manager.
+   
+   - Select **Start**, and then select **Server Manager**.
+
+2. Start the Add Roles and Features Wizard.
+   
+   - In Server Manager, select **Manage**, and then select **Add Roles and Features**.
+
+3. On the **Before you begin** page, review the information, and then select **Next**.
+
+4. On the **Select installation type** page, select **Role-based or feature-based installation**, and then select **Next**.
+
+5. On the **Select destination server** page, select the server where you want to install DHCP, and then select **Next**.
+
+6. On the **Select server roles** page, select the **DHCP Server** check box.
+
+7. In the **Add Roles and Features Wizard** dialog box that appears, select **Add Features** to include the required management tools.
+
+8. On the **Select server roles** page, select **Next**.
+
+9. On the **Select features** page, accept the default selections, and then select **Next**.
+
+10. On the **DHCP Server** page, review the information about the DHCP Server role, and then select **Next**.
+
+11. On the **Confirm installation selections** page, review your selections.
+    
+    - Optional: Select the **Restart the destination server automatically if required** check box if you want the server to restart automatically after installation.
+
+12. Select **Install** to begin the installation.
+
+13. After the installation completes, on the **Installation progress** page, select **Close**.
+
+## Complete DHCP post-installation configuration
+
+After you install the DHCP Server role, you must complete the post-installation configuration.
+
+1. In Server Manager, select the **Notifications** icon (flag with a warning symbol), and then select **Complete DHCP configuration**.
+
+2. In the **DHCP Post-Install configuration wizard**, on the **Description** page, select **Next**.
+
+3. On the **Authorization** page, choose one of the following options:
+   
+   - To use the current user's credentials to authorize the DHCP server in Active Directory, select **Use the following user's credentials**, verify the credentials are correct, and then select **Commit**.
+   - If you need to use different credentials, select **Use alternate credentials**, enter the appropriate credentials, and then select **Commit**.
+
+4. On the **Summary** page, verify that the configuration completed successfully, and then select **Close**.
+
+## Verify the installation
+
+1. In Server Manager, select **Tools**, and then select **DHCP** to open the DHCP management console.
+
+2. In the DHCP console, expand the server name to verify that the server appears and is authorized.
+
+3. Verify that both **IPv4** and **IPv6** nodes are present beneath the server name.
+
+---
+
+## Next steps
+
+After installing the DHCP Server role, you can:
+
+- Create and configure DHCP scopes to define IP address ranges for your network.
+- Configure DHCP options such as default gateway, DNS servers, and lease duration.
+- Set up DHCP failover for high availability.
+- Configure DHCP policies for advanced address assignment scenarios.
 
 <!---------------------------------------CLIENT SETUP------------------------------------------------------------------>
 <!--------------------------------Create Client Virtual Machine-------------------------------------------------------->
@@ -148,7 +226,11 @@ After the reset you will see the server set to 127.0.0.1.  We need to change it 
 <!---------------------------------Setup Client network and connect to the servers domain------------------------------->
 
 # Step 2: Setup Windows Client Network
+
+
 ## Configure to DHCP and DNS (IP of Windows Server - Domain controller)
+
+
 ## Validate from Server end that the computer is in Active Directory Users and Computers
 
 

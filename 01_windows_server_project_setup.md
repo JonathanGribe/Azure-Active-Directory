@@ -206,18 +206,283 @@ After you install the DHCP Server role, you must complete the post-installation 
 
 4. Verify that both **IPv4** and **IPv6** nodes are present beneath the server name.
 
-<img width="1605" height="900" alt="image" src="https://github.com/user-attachments/assets/a7956ce8-091b-42c5-90e6-6a72d3e7aef9" />
+<img width="757" height="900" alt="image" src="https://github.com/user-attachments/assets/24bf5244-2dcd-44d8-aa60-867725b6aad6" />
+
+
+---
+
+## Next steps
+# Configure DHCP Server on Windows Server 2025
+
+After you install the DHCP Server role, you need to configure scopes, options, and additional features to enable automatic IP address assignment on your network.
+
+## Create and configure a DHCP scope
+
+A DHCP scope defines the range of IP addresses that the DHCP server can assign to client devices on a specific subnet.
+
+### Create a new IPv4 scope
+
+1. Open the DHCP management console.
+   
+   - In Server Manager, select **Tools**, and then select **DHCP**.
+
+2. In the DHCP console, expand the server name, right-click **IPv4**, and then select **New Scope**.
+
+3. In the **New Scope Wizard**, on the **Welcome** page, select **Next**.
+
+4. On the **Scope Name** page, configure the following settings:
+   
+   - In the **Name** box, enter a descriptive name for the scope (for example, "Building A Network").
+   - Optional: In the **Description** box, enter additional details about the scope.
+   - Select **Next**.
+
+5. On the **IP Address Range** page, configure the address range:
+   
+   - In the **Start IP address** box, enter the first IP address in the range (for example, 192.168.1.10).
+   - In the **End IP address** box, enter the last IP address in the range (for example, 192.168.1.200).
+   - In the **Length** box, enter the subnet mask length, or use the **Subnet mask** box to enter the mask directly (for example, 255.255.255.0).
+   - Select **Next**.
+
+6. On the **Add Exclusions and Delay** page, add any IP addresses that should not be assigned:
+   
+   - Optional: In the **Start IP address** and **End IP address** boxes, enter ranges to exclude (for example, 192.168.1.1 to 192.168.1.9 for network equipment).
+   - Select **Add** to add the exclusion range.
+   - Select **Next**.
+
+7. On the **Lease Duration** page, configure how long clients can use an IP address:
+   
+   - Accept the default lease duration (8 days), or enter custom values for days, hours, and minutes.
+   - Select **Next**.
+
+8. On the **Configure DHCP Options** page, select **Yes, I want to configure these options now**, and then select **Next**.
+
+9. On the **Router (Default Gateway)** page, add the default gateway:
+   
+   - In the **IP address** box, enter the gateway address (for example, 192.168.1.1).
+   - Select **Add**.
+   - Select **Next**.
+
+10. On the **Domain Name and DNS Servers** page, configure DNS settings:
+    
+    - Optional: In the **Parent domain** box, enter your domain name.
+    - In the **IP address** box, enter the DNS server address.
+    - Select **Add**.
+    - Repeat for additional DNS servers if needed.
+    - Select **Next**.
+
+11. On the **WINS Servers** page, select **Next** (unless you need to configure WINS servers for legacy applications).
+
+12. On the **Activate Scope** page, select **Yes, I want to activate this scope now**, and then select **Next**.
+
+13. On the **Completing the New Scope Wizard** page, review your settings, and then select **Finish**.
+
+### Verify the scope configuration
+
+1. In the DHCP console, expand **IPv4**, and then expand the scope you created.
+
+2. Verify that the following items appear beneath the scope:
+   
+   - **Address Pool** - Shows the IP address range
+   - **Address Leases** - Shows active leases (initially empty)
+   - **Reservations** - For configuring static IP assignments
+   - **Scope Options** - Shows configured options like gateway and DNS
+
+---
+
+## Configure DHCP options
+
+DHCP options provide additional network configuration settings to client devices beyond IP addresses. You can configure options at the server level (applies to all scopes) or at the scope level (applies to a specific scope only).
+
+### Configure scope-level options
+
+1. In the DHCP console, expand **IPv4**, expand the scope, right-click **Scope Options**, and then select **Configure Options**.
+
+2. In the **Scope Options** dialog box, select the options you want to configure:
+
+   **To configure the default gateway (Router):**
+   
+   - Select the **003 Router** check box.
+   - In the **IP address** box, enter the gateway address.
+   - Select **Add**.
+
+   **To configure DNS servers:**
+   
+   - Select the **006 DNS Servers** check box.
+   - In the **IP address** box, enter the DNS server address.
+   - Select **Add**.
+   - Repeat for additional DNS servers.
+
+   **To configure the DNS domain name:**
+   
+   - Select the **015 DNS Domain Name** check box.
+   - In the **String value** box, enter your domain name (for example, contoso.com).
+
+   **To configure the lease duration (Option 051):**
+   
+   - Select the **051 Lease** check box.
+   - In the **Long** box, enter the lease duration in seconds.
+
+3. After you configure all required options, select **OK**.
+
+### Configure server-level options
+
+Server-level options apply to all scopes on the DHCP server.
+
+1. In the DHCP console, expand the server name, right-click **Server Options**, and then select **Configure Options**.
+
+2. Configure the desired options using the same method as scope-level options.
+
+3. Select **OK** to apply the settings.
+
+**Note:** Scope-level options override server-level options. Configure common settings at the server level and scope-specific settings at the scope level.
+
+---
+
+## Set up DHCP failover for high availability
+
+DHCP failover enables two DHCP servers to provide IP addresses for the same scope, ensuring service continuity if one server becomes unavailable. This feature supports load balance mode (both servers actively respond) and hot standby mode (one server is primary).
+
+### Prerequisites
+
+Before you configure DHCP failover, verify that:
+
+- You have two DHCP servers installed and authorized in Active Directory.
+- Both servers have network connectivity to each other.
+- You have configured at least one scope on the primary DHCP server.
+- The scope you want to replicate is not already part of a failover relationship.
+
+### Configure DHCP failover
+
+1. On the primary DHCP server, open the DHCP console.
+
+2. Expand **IPv4**, right-click the scope you want to configure for failover, and then select **Configure Failover**.
+
+3. In the **Configure Failover** wizard, on the **Introduction to DHCP Failover** page, verify the scope is selected, and then select **Next**.
+
+4. On the **Specify the partner server to use for failover** page, configure the partner server:
+   
+   - Select **Add Server**.
+   - In the **Add Server** dialog box, select the partner DHCP server, and then select **OK**.
+   - Select **Next**.
+
+5. On the **Create a new failover relationship** page, configure the failover settings:
+   
+   - In the **Relationship Name** box, enter a descriptive name (for example, "DHCP-Failover-01").
+   - In the **Maximum Client Lead Time** box, accept the default (1 hour) or enter a custom value.
+   - In the **Mode** dropdown list, select one of the following:
+     - **Load Balance** - Both servers actively respond to DHCP requests. In the **Load Balance Percentage** boxes, configure the traffic distribution (default is 50/50).
+     - **Hot Standby** - One server is active, the other is standby. In the **Role of Partner Server** dropdown list, select **Standby**. In the **Addresses reserved for standby server** box, enter the percentage of addresses reserved (default is 5%).
+   - Optional: Select the **Enable Message Authentication** check box, and then enter a shared secret for secure communication between servers.
+   - Select **Next**.
+
+6. On the **Finish** page, review the configuration summary, and then select **Finish**.
+
+7. On the **Configure Failover** results page, verify the operation completed successfully, and then select **Close**.
+
+### Verify DHCP failover configuration
+
+1. In the DHCP console on the primary server, expand **IPv4**, and then select the scope.
+
+2. In the details pane, verify that the **Failover** column shows the failover relationship name.
+
+3. Right-click the scope, and then select **Properties**.
+
+4. Select the **Failover** tab to view failover relationship details.
+
+5. On the partner DHCP server, open the DHCP console and verify that the replicated scope appears under **IPv4**.
+
+**Note:** After you configure failover, scope changes made on either server automatically replicate to the partner server.
+
+---
+
+## Configure DHCP policies for advanced address assignment
+
+DHCP policies enable you to assign IP addresses and options based on specific criteria such as device type, vendor class, user class, or MAC address. This allows for advanced scenarios like assigning different IP ranges to printers versus computers, or providing specific configurations to mobile devices.
+
+### Create a scope-level policy
+
+1. In the DHCP console, expand **IPv4**, expand the scope, right-click **Policies**, and then select **New Policy**.
+
+2. In the **DHCP Policy Configuration Wizard**, on the **Policy Name** page, configure the following:
+   
+   - In the **Policy Name** box, enter a descriptive name (for example, "Printers Policy").
+   - Optional: In the **Description** box, enter additional details.
+   - Select **Next**.
+
+3. On the **Configure Conditions for the policy** page, add conditions that identify which clients receive this policy:
+   
+   - Select **Add**.
+   - In the **Add/Edit Condition** dialog box, configure the following:
+     - In the **Criteria** dropdown list, select a condition type (for example, **Vendor Class**, **MAC Address**, **User Class**, or **Client Identifier**).
+     - In the **Operator** dropdown list, select **Equals** or **Not Equals**.
+     - In the **Value** box, enter the matching value (for example, for printers, you might use a vendor class like "HP Printer").
+     - Select **Add**, and then select **OK**.
+   - Select **Next**.
+
+4. On the **Configure settings for the policy** page, configure IP address range settings:
+   
+   - Optional: Select **Yes** if you want to configure a specific IP address range for this policy.
+   - If you selected **Yes**, enter the **Start IP address** and **End IP address** for the policy.
+   - Select **Next**.
+
+5. On the **Configure options for the policy** page, configure policy-specific DHCP options:
+   
+   - Select **Yes** if you want to configure specific DHCP options for devices matching this policy.
+   - If you selected **Yes**, configure options such as default gateway, DNS servers, or other settings specific to this device type.
+   - Select **Next**.
+
+6. On the **Summary** page, review your policy configuration, and then select **Finish**.
+
+### Create a server-level policy
+
+Server-level policies apply across all scopes on the DHCP server.
+
+1. In the DHCP console, expand the server name, right-click **Policies**, and then select **New Policy**.
+
+2. Follow the same steps as creating a scope-level policy (steps 2-6 above).
+
+### Configure policy processing order
+
+If multiple policies apply to a client, DHCP processes them in order of priority.
+
+1. In the DHCP console, navigate to **Policies** (either under a scope or under the server name).
+
+2. In the details pane, verify the **Processing Order** column.
+
+3. To change the processing order, right-click a policy, and then select **Move Up** or **Move Down**.
+
+### Example policy scenarios
+
+**Assign specific IP ranges to different device types:**
+
+- Create a policy for printers using Vendor Class condition, assign them IPs from 192.168.1.150-192.168.1.200.
+- Create a policy for computers using MAC Address prefix condition, assign them IPs from 192.168.1.50-192.168.1.149.
+
+**Provide different DNS servers based on user class:**
+
+- Create a policy for "Guest" user class with public DNS servers.
+- Create a policy for "Employee" user class with internal DNS servers.
+
+**Configure shorter lease times for mobile devices:**
+
+- Create a policy based on Vendor Class for mobile devices.
+- Configure a shorter lease duration (for example, 4 hours instead of 8 days).
 
 ---
 
 ## Next steps
 
-After installing the DHCP Server role, you can:
+After configuring DHCP scopes, options, failover, and policies, you can:
 
-- Create and configure DHCP scopes to define IP address ranges for your network.
-- Configure DHCP options such as default gateway, DNS servers, and lease duration.
-- Set up DHCP failover for high availability.
-- Configure DHCP policies for advanced address assignment scenarios.
+- Monitor DHCP server performance using the DHCP console or Performance Monitor.
+- Review DHCP audit logs located in %SystemRoot%\System32\DHCP for troubleshooting.
+- Configure DHCP reservations for devices that require consistent IP addresses.
+- Set up DHCP relay agents for multi-subnet environments.
+- Implement DHCP Name Protection to prevent name squatting in DNS.
+
+
+
+
 
 <!---------------------------------------CLIENT SETUP------------------------------------------------------------------>
 <!--------------------------------Create Client Virtual Machine-------------------------------------------------------->

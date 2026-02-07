@@ -140,18 +140,6 @@ After the reset you will see the server set to 127.0.0.1.  We need to change it 
 # Section 3: Install DHCP Role
 # Install the DHCP Server role on Windows Server 2025
 
-This walkthrough describes how to install the Dynamic Host Configuration Protocol (DHCP) Server role on Windows Server 2025. The DHCP Server role enables your server to automatically assign IP addresses and network configuration settings to client devices on your network.
-
-## Prerequisites
-
-Before you begin, verify that:
-
-- You have administrative credentials for the server.
-- The server has a static IP address configured.
-- You have network connectivity.
-
-## Install the DHCP Server role
-
 1. Open Server Manager.
    
    - Select **Start**, and then select **Server Manager**.
@@ -170,27 +158,34 @@ Before you begin, verify that:
 
 7. In the **Add Roles and Features Wizard** dialog box that appears, select **Add Features** to include the required management tools.
 
-8. On the **Select server roles** page, select **Next**.
+<img width="998" height="533" alt="image" src="https://github.com/user-attachments/assets/ee734959-dc07-48de-ae6e-fa3abd5f3f89" />
 
-9. On the **Select features** page, accept the default selections, and then select **Next**.
 
-10. On the **DHCP Server** page, review the information about the DHCP Server role, and then select **Next**.
+9. On the **Select server roles** page, select **Next**.
 
-11. On the **Confirm installation selections** page, review your selections.
+10. On the **Select features** page, accept the default selections, and then select **Next**.
+
+11. On the **DHCP Server** page, review the information about the DHCP Server role, and then select **Next**.
+
+12. On the **Confirm installation selections** page, review your selections.
     
     - Optional: Select the **Restart the destination server automatically if required** check box if you want the server to restart automatically after installation.
 
-12. Select **Install** to begin the installation.
+13. Select **Install** to begin the installation.
+    <img width="785" height="559" alt="image" src="https://github.com/user-attachments/assets/58d5ee99-14e4-4368-a3b5-bb30fd575207" />
 
-13. After the installation completes, on the **Installation progress** page, select **Close**.
+
+15. After the installation completes, on the **Installation progress** page, select **Close**.
 
 ## Complete DHCP post-installation configuration
 
 After you install the DHCP Server role, you must complete the post-installation configuration.
 
 1. In Server Manager, select the **Notifications** icon (flag with a warning symbol), and then select **Complete DHCP configuration**.
+<img width="785" height="559" alt="image" src="https://github.com/user-attachments/assets/b9ef01e3-f872-471f-9ad9-df843167e8ac" />
 
 2. In the **DHCP Post-Install configuration wizard**, on the **Description** page, select **Next**.
+
 
 3. On the **Authorization** page, choose one of the following options:
    
@@ -199,13 +194,19 @@ After you install the DHCP Server role, you must complete the post-installation 
 
 4. On the **Summary** page, verify that the configuration completed successfully, and then select **Close**.
 
+5. On the **Dashboard** page, you will see the 
+<img width="863" height="900" alt="image" src="https://github.com/user-attachments/assets/08b53bc7-4358-43e9-8048-d8a1361cfbe0" />
+
+
 ## Verify the installation
 
 1. In Server Manager, select **Tools**, and then select **DHCP** to open the DHCP management console.
 
 2. In the DHCP console, expand the server name to verify that the server appears and is authorized.
 
-3. Verify that both **IPv4** and **IPv6** nodes are present beneath the server name.
+4. Verify that both **IPv4** and **IPv6** nodes are present beneath the server name.
+
+<img width="1605" height="900" alt="image" src="https://github.com/user-attachments/assets/a7956ce8-091b-42c5-90e6-6a72d3e7aef9" />
 
 ---
 

@@ -212,7 +212,7 @@ After you install the DHCP Server role, you must complete the post-installation 
 ---
 
 ## Next steps
-# Configure DHCP Server on Windows Server 2025
+# Configure DHCP Scope
 
 After you install the DHCP Server role, you need to configure scopes, options, and additional features to enable automatic IP address assignment on your network.
 
@@ -235,6 +235,8 @@ A DHCP scope defines the range of IP addresses that the DHCP server can assign t
    - In the **Name** box, enter a descriptive name for the scope (for example, "Building A Network").
    - Optional: In the **Description** box, enter additional details about the scope.
    - Select **Next**.
+     <img width="517" height="426" alt="image" src="https://github.com/user-attachments/assets/93f9716f-3a92-4740-9372-5bb7d345a154" />
+
 
 5. On the **IP Address Range** page, configure the address range:
    
@@ -242,12 +244,21 @@ A DHCP scope defines the range of IP addresses that the DHCP server can assign t
    - In the **End IP address** box, enter the last IP address in the range (for example, 192.168.1.200).
    - In the **Length** box, enter the subnet mask length, or use the **Subnet mask** box to enter the mask directly (for example, 255.255.255.0).
    - Select **Next**.
+     <img width="517" height="426" alt="image" src="https://github.com/user-attachments/assets/753c71f3-35d6-4732-bd23-3d3ff7754340" />
+
 
 6. On the **Add Exclusions and Delay** page, add any IP addresses that should not be assigned:
    
    - Optional: In the **Start IP address** and **End IP address** boxes, enter ranges to exclude (for example, 192.168.1.1 to 192.168.1.9 for network equipment).
+  
    - Select **Add** to add the exclusion range.
+   
    - Select **Next**.
+    
+    <img width="517" height="426" alt="image" src="https://github.com/user-attachments/assets/f7c3bdd4-8127-4f7e-a3ab-01681d166847" />
+
+    
+
 
 7. On the **Lease Duration** page, configure how long clients can use an IP address:
    
@@ -258,9 +269,10 @@ A DHCP scope defines the range of IP addresses that the DHCP server can assign t
 
 9. On the **Router (Default Gateway)** page, add the default gateway:
    
-   - In the **IP address** box, enter the gateway address (for example, 192.168.1.1).
+   - In the **IP address** box, enter the gateway address (In this case, 172.1.1.1).
    - Select **Add**.
    - Select **Next**.
+<img width="517" height="426" alt="image" src="https://github.com/user-attachments/assets/0e69d9d8-dec6-4854-a3b4-abd3210f4e23" />
 
 10. On the **Domain Name and DNS Servers** page, configure DNS settings:
     

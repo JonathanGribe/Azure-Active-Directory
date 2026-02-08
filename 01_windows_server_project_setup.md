@@ -8,9 +8,12 @@
 # Table of Contents
 
 # Purpose of the lab
+The purpose of this lab is to build confidence in using Microsoft Windows Server 2025.  It will walk through the basics of creating a Virtual Machine in Microsoft Azure to host the server. It will also walkthrough installing
+key roles and features on that server and connecting a client windows desktop machine to the server. 
 
 # Tools and Technology
-
+Microsoft Azure
+Microsoft Windows Server 2025 Datacenter x64
 
 
 <!------------------------------SERVER SETUP------------------------------------->

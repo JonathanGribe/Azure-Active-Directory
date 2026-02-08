@@ -312,13 +312,14 @@ Create the Virtual Machine in the same way that we have created the same manner 
 - except we will use the windows 11 base image
 <img width="749" height="36" alt="image" src="https://github.com/user-attachments/assets/d41e4966-ee91-47ed-b2f7-0843d90edbd3" />
 
-- For network, remember select the same vnet and subnet as the server
+- For network, remember select the same vnet as the server
 
 <img width="776" height="230" alt="image" src="https://github.com/user-attachments/assets/b51370ca-6a4e-43d4-9c14-4ff8d82aae4b" />
 
 
 - Take note of network information on the Azure home screen for the client
-<img width="387" height="196" alt="image" src="https://github.com/user-attachments/assets/98944fce-cfd3-4296-a243-257c1c18c4ed" />
+<img width="379" height="194" alt="image" src="https://github.com/user-attachments/assets/c0265fbc-b7ff-4e46-81da-7e311fc66cce" />
+
 
 
 
@@ -330,11 +331,43 @@ Create the Virtual Machine in the same way that we have created the same manner 
 - Use the clients private IP address which can be found through on the homepage of the virtual machine
 - Log into to the client machine via RDP through the server since the client does not have a public IP address
 
+<img width="452" height="554" alt="image" src="https://github.com/user-attachments/assets/8195d005-8009-44b5-8349-689edec9229c" />
 
-## Configure to DHCP and DNS (IP of Windows Server - Domain controller)
 
+## Configure to DNS and DHCP(IP of Windows Server - Domain controller)
+Configure client DNS
+-Go into network settings either via the control panel or Settings and Netwowrk
+-Select Use the following DNS server addresses
+-Type the name of the Preferred DNS server as the IP of the domain on Server 2025 VM
+<img width="1026" height="618" alt="image" src="https://github.com/user-attachments/assets/f4bf1159-59a2-45ca-a5ba-ccbce7015038" />
+
+## Connect to Windows Server DHCP
+Note: Azure will by default not allow a connection to a self created server. This be possible by setting up a DHCP rely via Azure.
+This may not be possible depending on your region. 
+
+## Connect to Servers domain controller
+Step 1: Select the **Windows icon**
+Step 2: Select **Accounts** on the left hand side
+Step 3: Select **Access work or school**
+Step 4: Select the **Connect** button beside **Add a work or schoole account**
+<img width="699" height="178" alt="image" src="https://github.com/user-attachments/assets/ab26d012-7149-4ef6-9731-3203d5c4f015" />
+
+Step 5: Select the option **Join this device to a local Active Directory domain**
+
+<img width="654" height="634" alt="image" src="https://github.com/user-attachments/assets/c70a2382-cf4b-48a4-8b45-ad0f79e32074" />
+
+Step 6: Type in the Domain name you want to connect to
+
+Step 7: Type the username and password of the Server
+
+Step 8: Create an account name under **User Account** and select Standard User under **Account Type**
 
 ## Validate from Server end that the computer is in Active Directory Users and Computers
+<img width="789" height="900" alt="image" src="https://github.com/user-attachments/assets/bdf8bfea-8644-499f-9a62-14e04730214c" />
+
+
+
+
 
 
 

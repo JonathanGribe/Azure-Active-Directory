@@ -78,7 +78,7 @@ This section guides you through creating a Windows Server 2025 virtual machine i
 
 The deployment begins. Wait for the deployment to complete before proceeding to the next section.
 
-<!--------------------------Setup server------------------------------------------------------------------>
+<!--------------------------------------------- Install Roles and Features on the Windows 2025 Server------------------------------------------------------------------>
 # Part I: Set up the server (continued)
 
 ## Install Active Directory Domain Services
@@ -153,7 +153,7 @@ Before installing AD DS, configure the server with a static IP address and tempo
 
 After installing AD DS, promote the server to a domain controller to create your Active Directory forest.
 
-1. In **Server Manager**, select the **notification flag** (with a warning icon) in the top-right corner.
+1. Under **Active Directory Domain Services**, select the **Promote this server to a domain controller**.
 
    ![Notification flag with post-deployment configuration](https://github.com/user-attachments/assets/2c43d52e-34c0-4cea-b2b9-f6952e1725b7)
 
@@ -162,8 +162,10 @@ After installing AD DS, promote the server to a domain controller to create your
    - Select **Add a new forest**
    - In the **Root domain name** field, enter your domain name (e.g., `contoso.local`)
    - Select **Next**
+<img width="761" height="560" alt="image" src="https://github.com/user-attachments/assets/0185edda-e477-45d7-ac24-4c40bcde4429" />
 
-   ![Deployment configuration for new forest](https://github.com/user-attachments/assets/06d6fe8f-1c03-4195-b912-cca754c1781d)
+  
+
 
 4. On the **Domain Controller Options** page:
    - Set both **Forest functional level** and **Domain functional level** to **Windows Server 2016** or higher
@@ -171,13 +173,13 @@ After installing AD DS, promote the server to a domain controller to create your
    - Enter and confirm a **Directory Services Restore Mode (DSRM) password**
    - Select **Next**
 
-   ![Domain Controller Options configuration](https://github.com/user-attachments/assets/18f8c4c2-a02d-4453-ab8a-6155e597b722)
 
 5. On the **DNS Options** page, select **Next** (ignore any delegation warnings).
 6. On the **Additional Options** page, verify the NetBIOS domain name, then select **Next**.
-7. On the **Paths** page, accept the default locations for the database, log files, and SYSVOL folder, then select **Next**.
-8. On the **Review Options** page, review your selections, then select **Next**.
-9. On the **Prerequisites Check** page, wait for validation to complete, then select **Install**.
+![Domain Controller Options configuration](https://github.com/user-attachments/assets/18f8c4c2-a02d-4453-ab8a-6155e597b722)
+8. On the **Paths** page, accept the default locations for the database, log files, and SYSVOL folder, then select **Next**.
+9. On the **Review Options** page, review your selections, then select **Next**.
+10. On the **Prerequisites Check** page, wait for validation to complete, then select **Install**.
 
    ![Prerequisites check completion](https://github.com/user-attachments/assets/dc318749-c28c-4950-9390-8f3584cf6a16)
 
@@ -266,7 +268,7 @@ Confirm the following before proceeding:
 
 After you install the DHCP Server role, you must complete the post-installation configuration.
 
-1. In Server Manager, select the **Notifications** icon (flag with a warning symbol), and then select **Complete DHCP configuration**.
+1. Under **DHCP Server**, select **Complete DHCP configuration** 
 <img width="785" height="559" alt="image" src="https://github.com/user-attachments/assets/b9ef01e3-f872-471f-9ad9-df843167e8ac" />
 
 2. In the **DHCP Post-Install configuration wizard**, on the **Description** page, select **Next**.
@@ -279,8 +281,10 @@ After you install the DHCP Server role, you must complete the post-installation 
 
 4. On the **Summary** page, verify that the configuration completed successfully, and then select **Close**.
 
-5. On the **Dashboard** page, you will see the 
-<img width="863" height="900" alt="image" src="https://github.com/user-attachments/assets/08b53bc7-4358-43e9-8048-d8a1361cfbe0" />
+5. On the **Dashboard** page, you will see the DHCP Role 
+<img width="863" height="900" alt="image" src="https://github.com/user-attachments/assets/898ca1c4-3862-4016-aa9a-91936e3e6da8" />
+
+
 
 
 ## Verify the installation
@@ -391,17 +395,17 @@ A DHCP scope defines the range of IP addresses that the DHCP server can assign t
 
 <!---------------------------------------CLIENT SETUP------------------------------------------------------------------>
 <!--------------------------------Create Client Virtual Machine-------------------------------------------------------->
-## Section 1: Create a Windows client virtual machine
+# Part II: Create a Windows client virtual machine
 
 Create a Windows 11 virtual machine using the same process described in [Section 1: Create an Azure virtual machine](#section-1-create-an-azure-virtual-machine), with the following differences:
 
-### Image selection
+## Image selection
 
 - **Image**: Select **Windows 11 Pro** (or your preferred Windows 11 edition)
 
   ![Windows 11 image selection](https://github.com/user-attachments/assets/d41e4966-ee91-47ed-b2f7-0843d90edbd3)
 
-### Network configuration
+## Network configuration
 
 > [!IMPORTANT]
 > The client VM must be on the same virtual network as the server to communicate with the domain controller.
@@ -415,7 +419,7 @@ Create a Windows 11 virtual machine using the same process described in [Section
 
 2. Complete the remaining configuration and select **Create**.
 
-### Record network information
+## Record network information
 
 After deployment completes:
 
@@ -431,11 +435,11 @@ After deployment completes:
 <!---------------------------------Setup Client network and connect to the servers domain------------------------------->
 
 
-## Section 2: Configure the client and join the domain
+# Set up and connect the Windows client
 
 This section guides you through connecting to the client VM, configuring DNS settings, and joining the client to the Active Directory domain.
 
-### Connect to the client via Remote Desktop
+## Connect to the client via Remote Desktop
 
 Since the client VM doesn't have a public IP address, connect to it from the Windows Server using Remote Desktop.
 
@@ -447,7 +451,7 @@ Since the client VM doesn't have a public IP address, connect to it from the Win
 
    ![Remote Desktop Connection to client VM](https://github.com/user-attachments/assets/8195d005-8009-44b5-8349-689edec9229c)
 
-### Configure DNS settings
+## Configure DNS settings
 
 Configure the client to use the domain controller as its DNS server.
 
@@ -462,7 +466,7 @@ Configure the client to use the domain controller as its DNS server.
 > [!NOTE]
 > This client will use a static IP address configuration since Azure doesn't support DHCP relay to custom DHCP servers in all regions. If you need DHCP functionality, you must configure an Azure DHCP relay agent, which may not be available in your region.
 
-### Join the client to the domain
+## Join the client to the domain
 
 1. On the **Windows 11 client**, open **Settings**.
 2. Select **Accounts** in the left navigation pane.
@@ -483,7 +487,7 @@ Configure the client to use the domain controller as its DNS server.
    - Select **Next**
 9. Select **Restart now** to complete the domain join process.
 
-### Verify domain join
+## Verify domain join
 
 After the client restarts, verify it successfully joined the domain.
 

@@ -17,8 +17,8 @@ The purpose of this lab is to build confidence in using Microsoft Windows Server
 key roles and features on that server and connecting a client windows desktop machine to the server. 
 
 # Tools and Technology
-Microsoft Azure
-Microsoft Windows Server 2025 Datacenter: Azure Edition - x64 Gen2
+- Microsoft Azure
+- Microsoft Windows Server 2025 Datacenter: Azure Edition - x64 Gen2
 
 
 <!------------------------------SERVER SETUP------------------------------------->

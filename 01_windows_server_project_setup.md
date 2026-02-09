@@ -1,4 +1,4 @@
-# Basic Windows Server 2022 Environment -  Setup Lab
+# Basic Windows Server 2025 Environment -  Setup Lab
 
 <img width="826" height="156" alt="image" src="https://github.com/user-attachments/assets/c0bdc42c-1106-4ed0-b35b-4fe833aae8b8" />
 

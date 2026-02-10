@@ -4,7 +4,24 @@
 # Purpose of Lab
 <!----------------Lab begins----------------------------------->
 # Active Directory User Basics
-## Accessing Active Directory Users and Computers
+## Active Directory primer
+
+Active Directory Domain Services (AD DS) is Microsoft's directory service that stores information about network objects such as users, computers, and groups. It organizes these objects into a hierarchical structure of domains, forests, and organizational units (OUs), enabling centralized management and authentication across your network. Understanding the distinction between user objects (the actual directory entry) and user accounts (the security principal), as well as Security Identifiers (SIDs), is fundamental to working effectively with AD DS.
+
+When creating and managing user accounts in Active Directory, you'll work primarily with Active Directory Users and Computers (ADUC). User accounts can be domain-based (authenticated by AD) or local (authenticated by individual machines), with domain users being identified by their User Principal Name (UPN) in the format username@domain.com. Each user account contains multiple attributes across different property tabs (General, Account, Profile, Organization), some required and others optional, along with critical account options like password policies, expiration settings, and account status flags that control how the account functions within your domain.
+
+Organizational structure and bulk management capabilities become essential as your environment grows. OUs provide a framework for organizing users logically, applying Group Policies, and delegating administrative control. When managing multiple users simultaneously, bulk operations using CSV files and PowerShell scripts become necessary. Understanding CSV file structure, required fields, and data validation is critical for successful bulk user creation and modification—skills that directly translate to managing user provisioning at scale.
+
+For organizations planning cloud migration, specific user attributes take on heightened importance. Email addresses, proxy addresses, and properly configured UPN suffixes are critical for Azure AD/Entra ID synchronization. Attributes like Employee ID, department, and title not only help organize your on-premises directory but also ensure smooth identity synchronization to cloud services. Additionally, understanding password policies, account lockout policies, user rights, and group membership basics forms the security foundation necessary before transitioning to hybrid or cloud-based identity management.
+
+**Additional Learning Resources**
+
+- [Active Directory Domain Services Overview - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
+- [Create a User Account in Active Directory - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/adac/introduction-to-active-directory-administrative-center-enhancements--level-100-#create-a-user-account)
+- [Organizational Units in Active Directory - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/creating-an-organizational-unit-design)
+- [Azure AD Connect: Accounts and Permissions - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/reference-connect-accounts-permissions)
+- [Password Policies and Account Lockout - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/password-policy)
+Accessing Active Directory Users and Computers
 
 ### Default Active Directory Containers and OUs
 When you load Active Directory Users and Computers you will see several folders on the left-hand side under the domain controller **corp.myserver.com**

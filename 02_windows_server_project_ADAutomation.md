@@ -42,7 +42,36 @@ When you load Active Directory Users and Computers you will see several folders 
 
 # Automating User creation with Powershell
 ## Basic Script
-## Modified Script (To include topics like exceptions handling)
+
+```powershell
+Import-Module ActiveDirectory
+
+$firstname = Read-Host "First name"
+$lastname = Read-Host "Last name"
+$password = ConvertTo-SecureString "myPassword" -AsPlainText -Force
+
+New-ADUser -Name "$firstname $lastname" `
+           -GivenName $firstname `
+           -Surname $lastname `
+           -AccountPassword $password `
+           -Enabled $True
+
+Write-Host "User created successfully!"
+
+```
+## Modified Script (Importing a .csv file using powershell)
+
+This will allow us to create a more realistic Active Directory environment:
+
+Creation of the .csv file from excel:
+
+Finding the OU path for account creation (manual):
+1. Select **View** in Active Directory Users and Computers
+2. Select **Advanced Features**
+3. Right-click the OU you would like to acquire a path for
+4. Select **Properties**
+5. Select the **Attribute Editor tab**
+6. 
 ## Reading a .CSV file
 
 # Creating the Active Directory Environment

@@ -41,29 +41,61 @@ When you load Active Directory Users and Computers you will see several folders 
 - **Users** - The default container for new user accounts and groups created without specifying a target OU. Contains several built-in groups like Domain Admins, Domain Users, and the default Administrator account. Best practice: Create custom OUs for users and organize accounts there instead of using this default container.
 
 # Automating User creation with Powershell
-## Basic Script
 
-```powershell
-Import-Module ActiveDirectory
-
-$firstname = Read-Host "First name"
-$lastname = Read-Host "Last name"
-$password = ConvertTo-SecureString "myPassword" -AsPlainText -Force
-
-New-ADUser -Name "$firstname $lastname" `
-           -GivenName $firstname `
-           -Surname $lastname `
-           -AccountPassword $password `
-           -Enabled $True
-
-Write-Host "User created successfully!"
+## OU Structure
+This is how we are going to organize all of our personel in our simple company, part of the corp.myserver.com domain controller
+```
+corp.myserver.com
+│
+├── Corp
+│   ├── Users
+│   │   ├── Executives
+│   │   ├── Managers
+│   │   ├── Staff
+│   │   └── Service Accounts
+│   ├── Computers
+│   │   ├── Workstations
+│   │   └── Servers
+│   └── Groups
+│       ├── Security
+│       └── Distribution
+│
+└── IT
+    ├── Admin Users
+    ├── Admin Computers
+    └── Admin Groups
 
 ```
-## Modified Script (Importing a .csv file using powershell)
 
-This will allow us to create a more realistic Active Directory environment:
+## Using Powershell to create the OU structure in Active Directory:
+```powershell
+New-ADOrganizationalUnit -Name "Corp" -Path "DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "IT" -Path "DC=corp,DC=myserver,DC=com"
 
-Creation of the .csv file from excel:
+New-ADOrganizationalUnit -Name "Users" -Path "OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Computers" -Path "OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Groups" -Path "OU=Corp,DC=corp,DC=myserver,DC=com"
+
+New-ADOrganizationalUnit -Name "Executives" -Path "OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Managers" -Path "OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Staff" -Path "OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Service Accounts" -Path "OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com"
+
+New-ADOrganizationalUnit -Name "Workstations" -Path "OU=Computers,OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Servers" -Path "OU=Computers,OU=Corp,DC=corp,DC=myserver,DC=com"
+
+New-ADOrganizationalUnit -Name "Security" -Path "OU=Groups,OU=Corp,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Distribution" -Path "OU=Groups,OU=Corp,DC=corp,DC=myserver,DC=com"
+
+New-ADOrganizationalUnit -Name "Admin Users" -Path "OU=IT,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Admin Computers" -Path "OU=IT,DC=corp,DC=myserver,DC=com"
+New-ADOrganizationalUnit -Name "Admin Groups" -Path "OU=IT,DC=corp,DC=myserver,DC=com"
+
+```
+For adding a new OU within another OU you will need to find the OU Path:
+```powershell
+-Path "OU=IT,DC=corp,DC=myserver,DC=com"
+```
 
 Finding the OU path for account creation (manual):
 1. Select **View** in Active Directory Users and Computers
@@ -71,7 +103,108 @@ Finding the OU path for account creation (manual):
 3. Right-click the OU you would like to acquire a path for
 4. Select **Properties**
 5. Select the **Attribute Editor tab**
-6. 
+6. Copy the **distinguishedName**
+7. Paste where needed
+
+<img width="401" height="455" alt="image" src="https://github.com/user-attachments/assets/f82b8a13-6518-4d05-b0f3-d1c1453cfe43" />
+
+
+
+Once the script has been run, then it will generate the new Organizational Units:
+
+<img width="265" height="325" alt="image" src="https://github.com/user-attachments/assets/271c50f5-0258-4760-a357-d470bd733d58" />
+
+
+Note: You can verify the object is an Organization Unit:
+1. Select **View**
+2. Select **Advanced Features**
+3. Right-Click the OU you would like to check
+4. Select **Properties**
+5. Select the **Object Tab**
+6. Verify next to **Object class** it reads **Organizational Unit**   
+
+<img width="808" height="545" alt="image" src="https://github.com/user-attachments/assets/8c26e9d2-1a63-4fda-95ff-f2932bc1020d" />
+
+
+## Creating New Users
+Now that we have the OU structure in place we need to create users for the new OUs:
+Two Methods:
+1. Manual creation
+2. Automatic creation via script
+3. Reading in a .csv file
+
+## Manually Creating User Accounts
+
+Link to Microsoft website
+
+### Creating users via powershell script
+```powershell
+
+#Manually adding a user and adding them to a corresponding OU:
+
+Import-Module ActiveDirectory
+
+# --- Collect user information first ---
+$firstname = Read-Host "First name"
+$lastname = Read-Host "Last name"
+$username = "$firstname.$lastname"
+$password = ConvertTo-SecureString "myPassword123" -AsPlainText -Force
+
+Write-Host ""
+Write-Host "Select the OU to create the user in:"
+Write-Host "1. Executives"
+Write-Host "2. Managers"
+Write-Host "3. Staff"
+Write-Host "4. Service Accounts"
+Write-Host "5. Admin Users"
+
+$choice = Read-Host "Enter the number of your choice"
+
+# --- Map selection to OU path ---
+switch ($choice) {
+    "1" { $ouPath = "OU=Executives,OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com" }
+    "2" { $ouPath = "OU=Managers,OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com" }
+    "3" { $ouPath = "OU=Staff,OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com" }
+    "4" { $ouPath = "OU=Service Accounts,OU=Users,OU=Corp,DC=corp,DC=myserver,DC=com" }
+    "5" { $ouPath = "OU=Admin Users,OU=IT,DC=corp,DC=myserver,DC=com" }
+    default {
+        Write-Host "Invalid selection. Exiting."
+        exit
+    }
+}
+
+# --- Create the user ---
+New-ADUser -Name "$firstname $lastname" `
+-GivenName $firstname `
+-Surname $lastname `
+-SamAccountName $username `
+-UserPrincipalName "$username@corp.myserver.com" `
+-AccountPassword $password `
+-Enabled $True `
+-Path $ouPath
+
+#Force Password Change at next Login
+Set-ADUser -Identity $username -ChangePasswordAtLogon $True 
+
+Write-Host ""
+Write-Host "User $firstname $lastname created successfully in:"
+Write-Host $ouPath
+
+```
+## Modified Script (Importing a .csv file using powershell)
+
+This will allow us to create a more realistic Active Directory environment:
+
+
+
+
+
+
+Creation of the .csv file from excel:
+
+
+
+   
 ## Reading a .CSV file
 
 # Creating the Active Directory Environment

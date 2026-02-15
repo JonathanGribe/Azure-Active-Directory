@@ -104,7 +104,8 @@ Finding the OU path for account creation (manual):
 
 Once the script has been run, then it will generate the new Organizational Units:
 
-<img width="265" height="325" alt="image" src="https://github.com/user-attachments/assets/271c50f5-0258-4760-a357-d470bd733d58" />
+<img width="267" height="391" alt="image" src="https://github.com/user-attachments/assets/beec038d-302b-49ef-8ed8-a68447ba9d11" />
+
 
 
 Note: You can verify the object is an Organization Unit:
@@ -115,7 +116,8 @@ Note: You can verify the object is an Organization Unit:
 5. Select the **Object Tab**
 6. Verify next to **Object class** it reads **Organizational Unit**   
 
-<img width="808" height="545" alt="image" src="https://github.com/user-attachments/assets/8c26e9d2-1a63-4fda-95ff-f2932bc1020d" />
+<img width="800" height="582" alt="image" src="https://github.com/user-attachments/assets/1d968cce-dd55-4b59-83b9-9bac7ce63a28" />
+
 
 
 ## Creating New Users
@@ -187,7 +189,37 @@ Write-Host $ouPath
 ```
 ## Modified Script (Importing a .csv file using powershell)
 
-This will allow us to create a more realistic Active Directory environment:
+The .csv file including first name, lastname, and descriptions was created by Microsoft Co-pilot
+
+```powershell
+# Import the CSV file
+$users = Import-Csv -Path ".\users.csv"
+
+foreach ($user in $users) {
+
+    # Build username and secure password
+    $username = $user.Username
+    $password = ConvertTo-SecureString "TempPassword123!" -AsPlainText -Force
+
+    # Create the AD user
+    New-ADUser `
+        -Name "$($user.FirstName) $($user.LastName)" `
+        -GivenName $user.FirstName `
+        -Surname $user.LastName `
+        -SamAccountName $username `
+        -UserPrincipalName "$username@corp.myserver.com" `
+        -Description $user.Description `
+        -AccountPassword $password `
+        -Enabled $true `
+        -Path $user.OUPath
+
+    # Force password change at next logon
+    Set-ADUser -Identity $username -ChangePasswordAtLogon $true
+
+    Write-Host "Created user: $username in $($user.OUPath)" -ForegroundColor Green
+}
+
+```
 
 
 
@@ -199,7 +231,9 @@ Creation of the .csv file from excel:
 
 
    
-## Reading a .CSV file
+## Double checking OU paths
+<img width="952" height="349" alt="image" src="https://github.com/user-attachments/assets/598b3f62-b3d1-4018-9fed-4b04f5f9009f" />
+
 
 # Creating the Active Directory Environment
 

@@ -47,30 +47,24 @@ This is how we are going to organize all of our personel in our simple company, 
 ```
 corp.myserver.com
 │
-├── Corp
-│   ├── Users
-│   │   ├── Executives
-│   │   ├── Managers
-│   │   ├── Staff
-│   │   └── Service Accounts
-│   ├── Computers
-│   │   ├── Workstations
-│   │   └── Servers
-│   └── Groups
-│       ├── Security
-│       └── Distribution
-│
-└── IT
-    ├── Admin Users
-    ├── Admin Computers
-    └── Admin Groups
+└── Corp
+    ├── Users
+    │   ├── Executives
+    │   ├── Managers
+    │   ├── Staff
+    │   └── Service Accounts
+    ├── Computers
+    │   ├── Workstations
+    │   └── Servers
+    └── Groups
+        ├── Security
+        └── Distribution
 
 ```
 
 ## Using Powershell to create the OU structure in Active Directory:
 ```powershell
 New-ADOrganizationalUnit -Name "Corp" -Path "DC=corp,DC=myserver,DC=com"
-New-ADOrganizationalUnit -Name "IT" -Path "DC=corp,DC=myserver,DC=com"
 
 New-ADOrganizationalUnit -Name "Users" -Path "OU=Corp,DC=corp,DC=myserver,DC=com"
 New-ADOrganizationalUnit -Name "Computers" -Path "OU=Corp,DC=corp,DC=myserver,DC=com"
@@ -87,9 +81,7 @@ New-ADOrganizationalUnit -Name "Servers" -Path "OU=Computers,OU=Corp,DC=corp,DC=
 New-ADOrganizationalUnit -Name "Security" -Path "OU=Groups,OU=Corp,DC=corp,DC=myserver,DC=com"
 New-ADOrganizationalUnit -Name "Distribution" -Path "OU=Groups,OU=Corp,DC=corp,DC=myserver,DC=com"
 
-New-ADOrganizationalUnit -Name "Admin Users" -Path "OU=IT,DC=corp,DC=myserver,DC=com"
-New-ADOrganizationalUnit -Name "Admin Computers" -Path "OU=IT,DC=corp,DC=myserver,DC=com"
-New-ADOrganizationalUnit -Name "Admin Groups" -Path "OU=IT,DC=corp,DC=myserver,DC=com"
+
 
 ```
 For adding a new OU within another OU you will need to find the OU Path:
@@ -148,6 +140,7 @@ Import-Module ActiveDirectory
 $firstname = Read-Host "First name"
 $lastname = Read-Host "Last name"
 $username = "$firstname.$lastname"
+$description = Read-Host "Enter a description" 
 $password = ConvertTo-SecureString "myPassword123" -AsPlainText -Force
 
 Write-Host ""
@@ -179,6 +172,7 @@ New-ADUser -Name "$firstname $lastname" `
 -Surname $lastname `
 -SamAccountName $username `
 -UserPrincipalName "$username@corp.myserver.com" `
+-Description $description `
 -AccountPassword $password `
 -Enabled $True `
 -Path $ouPath

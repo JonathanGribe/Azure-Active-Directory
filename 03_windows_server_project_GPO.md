@@ -1,37 +1,22 @@
 # Windows Server 2025: Active Directory - Implementing Group Policy
 
 # Table of Contents
-Part I: High Overview
-1. Compliance Standards
-2. Organizational Policy
-3. Technical Controls
-4. GPO creation
 
-Part II: GPO Implementation
+# Controls to Implement
+## Based on Policy
+
+## Technical Controls to Implement
+
+# Part II: GPO Implementation
 1. Different Implementation Method
 2. Manual
 3. Powershell
 
-# PART I: Concepts
-
-## Framework
-The framework for this section is taken from governance structures suggested by industry frameworks such as NIST 800-53, ISO/IEC 27001, CIS Controls, and Microsofts Group Policy deployment guidance. There is a process by which we take the standards, create organizational policy & technical controls, which are finally implemented as Group Policy Objects (GPOs). 
 
 
-## Compliance Standards
-Organizational security policies are derived from compliance frameworks such as NIST SP 800‑53 and ISO/IEC 27001. For example, NIST AC‑11 requires automatic session locking, which organizations typically implement through technical controls such as Group Policy. Microsoft’s Group Policy documentation confirms that GPOs are the primary mechanism for enforcing security settings across Windows domains. This is in accordance to order of precedence where an 'enforced policy' can override local policies to establish consistent configuration across AD environments.
-https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-processing
-
-
-As per NIST 800-53 Control PL-2 Organizations are required to create an orgnization policy and document procedure describing how the policy is implemented within the organization:  
-https://csf.tools/reference/nist-sp-800-53/r5/pl/pl-2/
-
-This can be found at: https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final
-## Organizational Policy
-https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines
 
 ```
- Organizational Security Policy
+ Technical Controls to Implement
 (Modeled after NIST SP 800 53 and ISO/IEC 27001 principles)
 1. Purpose
 The purpose of this policy is to establish security requirements for the protection of organizational information systems and data. This policy defines the minimum technical and administrative controls required to ensure confidentiality, integrity, and availability across all corporate computing environments.

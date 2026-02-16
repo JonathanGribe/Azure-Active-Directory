@@ -1,16 +1,23 @@
 # Windows Server 2025: Active Directory - Implementing Group Policy
 
 # Table of Contents
-Part I: Concepts
+Part I: High Overview
 1. Compliance Standards
 2. Organizational Policy
 3. Technical Controls
 4. GPO creation
 
 Part II: GPO Implementation
-
+1. Different Implementation Method
+2. Manual
+3. Powershell
 
 # PART I: Concepts
+
+## Framework
+The framework for this section is taken from governance structures suggested by industry frameworks such as NIST 800-53, ISO/IEC 27001, CIS Controls, and Microsofts Group Policy deployment guidance. There is a process by which we take the standards, create organizational policy & technical controls, which are finally implemented as Group Policy Objects (GPOs). 
+
+
 ## Compliance Standards
 Organizational security policies are derived from compliance frameworks such as NIST SP 800‑53 and ISO/IEC 27001. For example, NIST AC‑11 requires automatic session locking, which organizations typically implement through technical controls such as Group Policy. Microsoft’s Group Policy documentation confirms that GPOs are the primary mechanism for enforcing security settings across Windows domains. This is in accordance to order of precedence where an 'enforced policy' can override local policies to establish consistent configuration across AD environments.
 https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-processing
@@ -125,4 +132,6 @@ Creating GPOs
 Creating the individual GPOs for the lab environment
    
 # PART II: GPO Implementation (based on the Organizational Policy/Technical Controls)
+
+In this part we take our technical controls and implement them as group policy objects.
 

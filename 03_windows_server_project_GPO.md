@@ -4,7 +4,7 @@
 Part I: Introduction and Technical Controls
 Part II: Implementation of Technical Controls
 
-# Introduction
+# Part I: Introduction
 Get into how Technical controls are formed. If you want or just list them below, lmao
 
 ## Technical Controls to Implement

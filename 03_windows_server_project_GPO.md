@@ -1,4 +1,4 @@
-# Windows Server 2025: Active Directory - Implementing Group Policy
+# Windows Server 2025 Lab Continued... Active Directory - Implementing Group Policy
 
 # Table of Contents
 Part I: Introduction and Technical Controls

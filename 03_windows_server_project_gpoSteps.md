@@ -1,8 +1,6 @@
-```
 
-Absolutely, Jonathan — here is a **clean, task‑oriented, Microsoft‑style series of steps in Markdown**, covering all the GPO configurations you need. This version is streamlined, procedural, and ready to drop into a lab guide or internal documentation.
 
----
+
 
 # **Group Policy Configuration Steps**
 
@@ -30,7 +28,10 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
    **Computer Configuration** > **Policies** > **Windows Settings** > **Security Settings** > **Local Policies** > **Audit Policy**  
 3. Enable:  
    - **Audit account logon events**: Success, Failure  
-   - **Audit logon events**: Success, Failure  
+   - **Audit logon events**: Success, Failure
+  
+  <img width="460" height="210" alt="image" src="https://github.com/user-attachments/assets/c3b09bad-4949-4291-90e8-bdbf4fd86ade" />
+
 
 ## **2.2 Require Network Level Authentication (NLA)**
 
@@ -153,16 +154,7 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
    - **Interactive logon: Message title for users attempting to log on**  
    - **Interactive logon: Message text for users attempting to log on**
 
----
-
-If you want, I can also:
-
-- Add a **table of contents**  
-- Add **metadata headers** (like Microsoft Learn uses)  
-- Break this into **multiple pages**  
-- Add **verification steps** for each control  
-
-Just tell me how polished you want this to be.
 
 
-```
+
+

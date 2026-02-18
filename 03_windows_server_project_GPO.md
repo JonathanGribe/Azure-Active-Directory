@@ -102,4 +102,14 @@ ________________________________________
 
 In this part we take our technical controls and implement them as group policy objects.
 
+## General Workflow for implementing Group Policy Objects:
+1. In the Server Management Console, Select Tools, then Group Policy Management
+2. In the left-pane expand the forest and domain
+3. Right-Click the Group Policy Objects container, and select New
+4. Link the GPO by Right-Clicking on the OU and select Link and Existing GPO
+5. Edit the GPO
+
+
+
+
 

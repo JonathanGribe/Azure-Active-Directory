@@ -147,16 +147,14 @@ More on AppLocker: https://learn.microsoft.com/en-us/windows/security/applicatio
    **Computer Configuration** > **Policies** > **Windows Settings** > **Security Settings** > **Advanced Audit Policy Configuration** > **Audit Policies**  
 2. Enable auditing for:  
    - Account Logon
-<img width="449" height="372" alt="image" src="https://github.com/user-attachments/assets/4b8071ae-5247-4579-8a58-f3a99960525e" />
-
-
    - Logon/Logoff
-<img width="431" height="266" alt="image" src="https://github.com/user-attachments/assets/a83dcb3f-3675-450e-99e0-55d842455b75" />
-
    - Account Management  
    - Privilege Use  
    - Policy Change  
    - System
+
+<img width="927" height="745" alt="image" src="https://github.com/user-attachments/assets/0b38accf-1e56-410a-8157-6bc2383ad5c9" />
+   
 
   
 
@@ -170,7 +168,16 @@ More on AppLocker: https://learn.microsoft.com/en-us/windows/security/applicatio
    **Computer Configuration** > **Policies** > **Administrative Templates** > **Windows Components** > **Windows Update**  
 2. Configure:  
    - **Configure Automatic Updates**: Enabled  
-   - **Specify intranet Microsoft update service location**: Set WSUS server URL  
+   - **Specify intranet Microsoft update service location**: Set WSUS server URL
+  
+  
+     <img width="587" height="251" alt="image" src="https://github.com/user-attachments/assets/f1d916b7-955d-4ef7-9fbd-08c02b1dc27a" />
+
+   
+   <img width="589" height="155" alt="image" src="https://github.com/user-attachments/assets/d341b89e-08e6-43f3-8569-0c88ee2b8162" />
+
+   We do not have a WSUS server for this lab, so we will leave it blank.
+
 
 ---
 
@@ -183,6 +190,9 @@ More on AppLocker: https://learn.microsoft.com/en-us/windows/security/applicatio
 2. Configure:  
    - **Interactive logon: Message title for users attempting to log on**  
    - **Interactive logon: Message text for users attempting to log on**
+
+   <img width="531" height="341" alt="image" src="https://github.com/user-attachments/assets/5ab4fd6c-51c5-4ac7-acb9-d0e1cb48428c" />
+
 
 
 

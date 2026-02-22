@@ -138,17 +138,27 @@ More on AppLocker: https://learn.microsoft.com/en-us/windows/security/applicatio
    - **Maximum log size**: Set according to retention needs  
    - **Retention method**: **Overwrite events as needed**
 
+  <img width="453" height="269" alt="image" src="https://github.com/user-attachments/assets/e1efbe65-9ad8-4a2f-8dab-6a7b42042c63" />
+
+
 ## **6.2 Enable advanced auditing**
 
 1. Navigate to:  
    **Computer Configuration** > **Policies** > **Windows Settings** > **Security Settings** > **Advanced Audit Policy Configuration** > **Audit Policies**  
 2. Enable auditing for:  
-   - Account Logon  
-   - Logon/Logoff  
+   - Account Logon
+<img width="449" height="372" alt="image" src="https://github.com/user-attachments/assets/4b8071ae-5247-4579-8a58-f3a99960525e" />
+
+
+   - Logon/Logoff
+<img width="431" height="266" alt="image" src="https://github.com/user-attachments/assets/a83dcb3f-3675-450e-99e0-55d842455b75" />
+
    - Account Management  
    - Privilege Use  
    - Policy Change  
-   - System  
+   - System
+
+  
 
 ---
 

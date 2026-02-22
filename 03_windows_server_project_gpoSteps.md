@@ -39,12 +39,17 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
    **Computer Configuration** > **Policies** > **Administrative Templates** > **Windows Components** > **Remote Desktop Services** > **Remote Desktop Session Host** > **Security**  
 2. Set **Require user authentication for remote connections by using Network Level Authentication** to **Enabled**.
 
+<img width="601" height="240" alt="image" src="https://github.com/user-attachments/assets/6532c061-f2b1-430e-ae15-019d0feaaf26" />
+
+
 ## **2.3 Restrict local administrator membership**
 
 1. Navigate to:  
    **Computer Configuration** > **Policies** > **Windows Settings** > **Security Settings** > **Restricted Groups**  
 2. Add the **Administrators** group.  
 3. Specify only approved administrative groups or accounts.
+
+<img width="377" height="525" alt="image" src="https://github.com/user-attachments/assets/d25599cc-51e8-46d6-8ab2-a80ddd90d150" />
 
 ---
 
@@ -60,6 +65,8 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
    - **Maximum password age**: 180 days  
    - **Enforce password history**: 24 passwords  
 
+<img width="523" height="207" alt="image" src="https://github.com/user-attachments/assets/958480ef-7df0-427b-b807-02c5d728bf88" />
+
 ---
 
 # **4. Session management (3.3)**
@@ -71,7 +78,10 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
 2. Configure:  
    - **Enable screen saver**: Enabled  
    - **Password protect the screen saver**: Enabled  
-   - **Screen saver timeout**: 600 seconds  
+   - **Screen saver timeout**: 600 seconds
+  
+   <img width="577" height="358" alt="image" src="https://github.com/user-attachments/assets/cd76511b-6f4b-4cf1-a925-92e76afe9121" />
+
 
 ## **4.2 Configure server lock timeout**
 
@@ -81,6 +91,7 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
 3. Navigate to:  
    **User Configuration** > **Policies** > **Administrative Templates** > **Control Panel** > **Personalization**  
 4. Set **Screen saver timeout** to **900 seconds**.
+<img width="606" height="385" alt="image" src="https://github.com/user-attachments/assets/0b77c4fe-00ca-4cec-94fd-f472df9a1de0" />
 
 ---
 
@@ -92,6 +103,9 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
    **Computer Configuration** > **Policies** > **Windows Settings** > **Security Settings** > **Windows Defender Firewall with Advanced Security**  
 2. For each profile (Domain, Private, Public), set **Firewall state** to **On**.
 
+<img width="810" height="555" alt="image" src="https://github.com/user-attachments/assets/e6da2388-f61a-4b33-ad62-228b9e578a44" />
+
+
 ## **5.2 Disable USB storage devices**
 
 1. Navigate to:  
@@ -99,12 +113,18 @@ The following procedures describe how to configure Group Policy Objects (GPOs) t
 2. Enable:  
    - **Removable Disks: Deny read access**  
    - **Removable Disks: Deny write access**
+  
+<img width="580" height="394" alt="image" src="https://github.com/user-attachments/assets/33ed8f51-adf6-4892-b19f-851e79bf26e6" />
 
 ## **5.3 Restrict unauthorized software installation**
 
 1. Navigate to:  
    **Computer Configuration** > **Policies** > **Windows Settings** > **Security Settings** > **Application Control Policies**  
 2. Configure **AppLocker** or **Software Restriction Policies** to allow only approved applications.
+
+<img width="489" height="740" alt="image" src="https://github.com/user-attachments/assets/5d5d844b-ad4c-40cc-8b32-abcbb5cd93a3" />
+
+More on AppLocker: https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/applocker/applocker-overview
 
 ---
 

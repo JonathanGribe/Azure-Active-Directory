@@ -109,21 +109,7 @@ In this part we take our technical controls and implement them as group policy o
 4. Link the GPO by Right-Clicking on the OU and select Link and Existing GPO
 5. Edit the GPO
 
- ### Control 1: Access Controls
- ```
-
-3.1 Access Control
-1.	User accounts must be uniquely assigned to individuals.
-2.	Multi factor authentication (MFA) must be used for all remote access and administrative accounts.
-3.	Access rights must follow the principle of least privilege and be reviewed quarterly.
-4.	Shared accounts are prohibited except where technically unavoidable and explicitly approved.
-```
-**1. User accounts must be uniquely assigned to individuals**
-Not a direct switch, but this allows monitoring of user accounts
-
-<img width="460" height="210" alt="image" src="https://github.com/user-attachments/assets/d44d8fd5-d8ea-4342-a0af-f1fc42168c87" />
-
-**2. 
+Implementation of these policies is in the file: 
 
 
 

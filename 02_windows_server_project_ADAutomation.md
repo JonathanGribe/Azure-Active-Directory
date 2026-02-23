@@ -2,6 +2,15 @@
 
 # Table of Contents
 # Purpose of Lab
+
+This lab is a continuation of the Windows Server 2025 basic setup.  In that lab we created a virtual machine on Microsoft Azure and installed Windows Server 2025. We also setup DNS and installed important roles and features such as Active Directory Domain Services (AD DS) and DHCP.  To end the lab we created a new client machine (running Windows 11) and added it to our domain controller.
+
+This lab we will continue the process by focusing on using Active Directory Users and Computers in order to:
+1. Setup a very simple OU structure (manually and via powershell)
+2. Add Users:
+   - Manually
+   - Via powershell
+   - Via .csv import
 <!----------------Lab begins----------------------------------->
 # Active Directory User Basics
 ## Active Directory primer
@@ -10,18 +19,8 @@ Active Directory Domain Services (AD DS) is Microsoft's directory service that s
 
 When creating and managing user accounts in Active Directory, you'll work primarily with Active Directory Users and Computers (ADUC). User accounts can be domain-based (authenticated by AD) or local (authenticated by individual machines), with domain users being identified by their User Principal Name (UPN) in the format username@domain.com. Each user account contains multiple attributes across different property tabs (General, Account, Profile, Organization), some required and others optional, along with critical account options like password policies, expiration settings, and account status flags that control how the account functions within your domain.
 
-Organizational structure and bulk management capabilities become essential as your environment grows. OUs provide a framework for organizing users logically, applying Group Policies, and delegating administrative control. When managing multiple users simultaneously, bulk operations using CSV files and PowerShell scripts become necessary. Understanding CSV file structure, required fields, and data validation is critical for successful bulk user creation and modification—skills that directly translate to managing user provisioning at scale.
+OUs provide a framework for organizing users logically, applying Group Policies, and delegating administrative control. When managing multiple users simultaneously, bulk operations using CSV files and PowerShell scripts become necessary. Understanding CSV file structure, required fields, and data validation is critical for successful bulk user creation and modification—skills that directly translate to managing user provisioning at scale.
 
-For organizations planning cloud migration, specific user attributes take on heightened importance. Email addresses, proxy addresses, and properly configured UPN suffixes are critical for Azure AD/Entra ID synchronization. Attributes like Employee ID, department, and title not only help organize your on-premises directory but also ensure smooth identity synchronization to cloud services. Additionally, understanding password policies, account lockout policies, user rights, and group membership basics forms the security foundation necessary before transitioning to hybrid or cloud-based identity management.
-
-**Additional Learning Resources**
-
-- [Active Directory Domain Services Overview - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
-- [Create a User Account in Active Directory - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/adac/introduction-to-active-directory-administrative-center-enhancements--level-100-#create-a-user-account)
-- [Organizational Units in Active Directory - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/plan/creating-an-organizational-unit-design)
-- [Azure AD Connect: Accounts and Permissions - Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/hybrid/connect/reference-connect-accounts-permissions)
-- [Password Policies and Account Lockout - Microsoft Learn](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/component-updates/password-policy)
-Accessing Active Directory Users and Computers
 
 ### Default Active Directory Containers and OUs
 When you load Active Directory Users and Computers you will see several folders on the left-hand side under the domain controller **corp.myserver.com**
@@ -40,10 +39,10 @@ When you load Active Directory Users and Computers you will see several folders 
 
 - **Users** - The default container for new user accounts and groups created without specifying a target OU. Contains several built-in groups like Domain Admins, Domain Users, and the default Administrator account. Best practice: Create custom OUs for users and organize accounts there instead of using this default container.
 
-# Automating User creation with Powershell
+# Creating the OU structure:
 
 ## OU Structure
-This is how we are going to organize all of our personel in our simple company, part of the corp.myserver.com domain controller
+This is how we are going to organize all of our personel in our simple company, part of the corp.myserver.com domain controller:
 ```
 corp.myserver.com
 │
@@ -120,7 +119,7 @@ Note: You can verify the object is an Organization Unit:
 
 
 
-## Creating New Users
+# Creating New Users manually or via powershell
 Now that we have the OU structure in place we need to create users for the new OUs:
 Two Methods:
 1. Manual creation
@@ -129,7 +128,48 @@ Two Methods:
 
 ## Manually Creating User Accounts
 
-Link to Microsoft website
+Absolutely, Jonathan — I can rewrite your instructions in a clean, **Microsoft‑style**, task‑focused format.  
+Microsoft’s style guide emphasizes clarity, action verbs, short steps, and consistent formatting.  
+Here’s the polished version.
+
+---
+
+# **Create a New User Account in Active Directory (GUI)**
+
+## **Prerequisites**
+- You must be signed in with an account that has permissions to create users in Active Directory.
+- The **Active Directory Domain Services** role and **AD DS tools** must be installed.
+
+---
+
+## **Create the user manually**
+
+1. Open **Active Directory Users and Computers**.  
+   - Select **Start**, type **dsa.msc**, and press **Enter**.
+
+2. In the console tree, expand the domain, and then select the **organizational unit (OU)** where you want to create the user.
+
+3. Right‑click the OU, select **New**, and then select **User**.
+
+4. Enter the user’s **First name**, **Last name**, and **User logon name**.  
+   - Select **Next**.
+
+5. Enter and confirm the user’s **password**.  
+   - Select the appropriate password options (for example, **User must change password at next logon**).  
+   - Select **Next**.
+
+6. Review the settings, and then select **Finish** to create the account.
+
+---
+
+## **Next steps**
+- Add the user to security groups as needed.
+- Configure additional properties such as profile paths, contact details, or group memberships.
+
+---
+
+If you want, I can rewrite more of your lab instructions in the same Microsoft Learn style so your documentation looks clean and professional.
+
 
 ### Creating users via powershell script
 ```powershell
@@ -221,11 +261,6 @@ foreach ($user in $users) {
 
 ```
 
-
-
-
-
-
 Creation of the .csv file from excel:
 
 
@@ -235,5 +270,5 @@ Creation of the .csv file from excel:
 <img width="952" height="349" alt="image" src="https://github.com/user-attachments/assets/598b3f62-b3d1-4018-9fed-4b04f5f9009f" />
 
 
-# Creating the Active Directory Environment
+## Troubleshooting
 

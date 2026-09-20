@@ -1,6 +1,5 @@
 # Windows Server 2025 - Active Directory and Powershell Automation
 
-# Table of Contents
 # Purpose of Lab
 
 This lab is a continuation of the Windows Server 2025 basic setup.  In that lab we created a virtual machine on Microsoft Azure and installed Windows Server 2025. We also setup DNS and installed important roles and features such as Active Directory Domain Services (AD DS) and DHCP.  To end the lab we created a new client machine (running Windows 11) and added it to our domain controller.

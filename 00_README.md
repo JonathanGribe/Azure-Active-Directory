@@ -15,4 +15,4 @@ Identity lifecycle and delegated administration
 ### Skills learned and tools used:
 Windows Server 2022 • Active Directory Domain Services • DNS • Group Policy • Active Directory Users and Computers • Organizational Units • Security Groups
 
-# [Next: Project Setup]()
+# [Next: Project Setup](https://github.com/JonathanGribe/Azure-Active-Directory/blob/main/01_windows_server_project_setup.md)

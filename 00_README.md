@@ -1,4 +1,4 @@
-# Azure-Active-Directory
+# Azure-Active-Directory Project
 <img width="826" height="156" alt="image" src="https://github.com/user-attachments/assets/c3a5fdb7-70c9-4401-8460-85f0177f129c" />
 
 ## Introduction:
